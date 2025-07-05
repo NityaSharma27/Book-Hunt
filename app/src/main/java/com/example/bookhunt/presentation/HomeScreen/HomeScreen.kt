@@ -122,7 +122,7 @@ fun HomeScreen(navHostController: NavHostController) {
                             )
                         },
                         onClick = {
-                            urlHandler.openUri(uri = "mailto:youremail@example.com")
+                            urlHandler.openUri(uri = "mailto:nityasharma1327@@example.com")
                         })
 
 
