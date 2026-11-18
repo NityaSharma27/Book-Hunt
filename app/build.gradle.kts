@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -23,6 +25,15 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        val localProperties = Properties()
+        rootProject.file("local.properties").takeIf { it.exists() }
+            ?.inputStream()?.use { localProperties.load(it) }
+
+        val geminiApiKey = project.findProperty("GEMINI_API_KEY")?.toString()
+            ?: localProperties.getProperty("GEMINI_API_KEY", "")
+        val escapedGeminiApiKey = geminiApiKey.replace("\\", "\\\\").replace("\"", "\\\"")
+        buildConfigField("String", "GEMINI_API_KEY", "\"$escapedGeminiApiKey\"")
     }
 
     buildTypes {
@@ -43,6 +54,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"

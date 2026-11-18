@@ -7,6 +7,9 @@ sealed class Routes {
     object HomeScreen
 
     @Serializable
+    object Recommendations
+
+    @Serializable
     data class BooksByCategory(val category : String)
 
     @Serializable

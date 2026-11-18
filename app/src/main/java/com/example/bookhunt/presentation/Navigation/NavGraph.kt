@@ -8,6 +8,7 @@ import androidx.navigation.toRoute
 import com.example.bookhunt.presentation.AllBooksByCategory.BooksByCategoryScreen
 import com.example.bookhunt.presentation.HomeScreen.HomeScreen
 import com.example.bookhunt.presentation.UIComponent.PdfViewerScreen
+import com.example.bookhunt.presentation.Recommendations.RecommendationsScreen
 
 @Composable
 fun NavGraph(navHostController: NavHostController) {
@@ -17,6 +18,10 @@ fun NavGraph(navHostController: NavHostController) {
     ) {
         composable<Routes.HomeScreen> {
             HomeScreen(navHostController = navHostController)
+        }
+
+        composable<Routes.Recommendations> {
+            RecommendationsScreen(navHostController = navHostController)
         }
         
         composable<Routes.ShowPdfScreen> {backStackEntry ->

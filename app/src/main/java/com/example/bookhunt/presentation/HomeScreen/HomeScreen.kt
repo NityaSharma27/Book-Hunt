@@ -49,6 +49,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import com.example.bookhunt.presentation.TabScreen.TabScreen
 import kotlinx.coroutines.launch
+import androidx.compose.material.icons.filled.AutoAwesome
+import com.example.bookhunt.presentation.Navigation.Routes
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBar
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -139,7 +143,7 @@ fun HomeScreen(navHostController: NavHostController) {
                             )
                         },
                         onClick = {
-                            urlHandler.openUri("https://github.com/NityaSharma27")
+                            urlHandler.openUri("https://github.com/NityaSharma27/Book-Hunt")
                         })
 
 
@@ -176,13 +180,34 @@ fun HomeScreen(navHostController: NavHostController) {
                         scrollBehavior = scrollBehaviour
                         )
                 }
-            ) {innerpadding ->
+            ) { innerpadding ->
                 Column(
-                    modifier = Modifier.padding(innerpadding).fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerpadding)
                 ) {
-                    TabScreen(navHostController = navHostController)
-                }
+                    androidx.compose.foundation.layout.Box(
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        TabScreen(navHostController = navHostController)
+                    }
 
+                    NavigationBar {
+                        NavigationBarItem(
+                            selected = false,
+                            onClick = {
+                                navHostController.navigate(Routes.Recommendations)
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = Icons.Filled.AutoAwesome,
+                                    contentDescription = "AI Picks"
+                                )
+                            },
+                            label = { Text("AI Picks") }
+                        )
+                    }
+                }
             }
     }
 }
